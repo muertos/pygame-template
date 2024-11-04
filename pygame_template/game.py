@@ -1,3 +1,7 @@
+import pygame
+import sys
+from pygame.locals import *
+
 class Game():
   def __init__(self, title, width, height, bg_color) -> None:
     self.title = title
@@ -7,6 +11,7 @@ class Game():
     self.screen, self.background = self.create_window()
     self.clock = pygame.time.Clock()
     self.screen.blit(self.background, (0,0))
+    self.running = True
     pygame.init()
 
   def create_window(self):
@@ -32,3 +37,9 @@ class Game():
     keys = pygame.key.get_pressed()
     if keys[pygame.K_END] or keys[pygame.K_ESCAPE]:
       sys.exit(0)
+  
+  def run(self):
+    while self.running:
+      self.handle_input()
+      self.screen.fill(self.bg_color)
+      pygame.display.flip()
